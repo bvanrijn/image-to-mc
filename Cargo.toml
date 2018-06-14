@@ -1,0 +1,6 @@
+[package]
+name = "image-to-minecraft"
+version = "0.1.0"
+authors = ["Barend <bvanrijn@users.noreply.github.com>"]
+
+[dependencies]
