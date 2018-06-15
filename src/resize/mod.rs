@@ -3,7 +3,7 @@ use image_utils;
 use std::path::Path;
 use tempfile;
 
-pub fn resize(file_name: String) -> image::DynamicImage {
+pub fn resize_image(file_name: String) -> image::DynamicImage {
     let temp_dir = tempfile::tempdir().unwrap();
     let output_file = &temp_dir.path().join(".resized.jpg");
 

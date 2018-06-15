@@ -79,7 +79,7 @@ fn get_file_name(item: &Item) -> String {
     return file_name
 }
 
-pub fn get() -> HashMap<[u8; 3], Item> {
+pub fn get_data_values() -> HashMap<[u8; 3], Item> {
     let items = get_items();
     let mut h = HashMap::new();
     
