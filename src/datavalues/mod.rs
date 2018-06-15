@@ -1,17 +1,23 @@
-extern crate serde;
-extern crate serde_json;
+use serde_json;
 
 use std::fs::File;
 use std::io::prelude::*;
 use std::collections::HashMap;
+use std::vec::Vec;
+
+use dominant;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Item {
     #[serde(rename="type")]
     item_type: u32,
+
     meta: u32,
     name: String,
     text_type: String,
+    
+    #[serde(skip)]
+    color: [u8; 3],
 }
 
 fn get_items_text() -> String {
@@ -30,24 +36,55 @@ fn get_items_text() -> String {
     return contents
 }
 
+fn exclude_range(it: &mut Vec<u32>, start: u32, stop: u32) {
+    for i in start..stop {
+        it.push(i)
+    }
+}
+
 fn get_items() -> Vec<Item> {
+    let mut ignored_types = vec![0, 2, 6, 8, 9, 10, 11, 12, 13, 19, 20, 23, 26, 27, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 44, 46, 50, 51, 52, 53, 54, 55, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 89, 91, 92, 93, 94, 95, 96, 97, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 119, 120, 122, 123, 124, 126, 127, 128, 130, 131, 132, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 154, 156, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 171, 174, 175, 176, 177, 178, 180, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 203, 204, 205, 207, 208, 209, 210, 211, 212, 213, 217, 218, 252];
+
+    exclude_range(&mut ignored_types, 219, 234);
+    exclude_range(&mut ignored_types, 235, 250);
+    exclude_range(&mut ignored_types, 255, 2267);
+
     let items_text = get_items_text();
     let items: Vec<Item> = match serde_json::from_str(&items_text) {
         Ok(items) => items,
         Err(why) => panic!("{}", why),
     };
+    
+    let mut ret = Vec::new();
 
-    return items
+    for mut item in items {
+        if ignored_types.contains(&item.item_type) {
+            continue
+        }
+
+        let file_name = get_file_name(&item);
+        let color = dominant::get_color(file_name);
+
+        item.color = [color.r, color.g, color.b];
+
+        ret.push(item);
+    }
+
+    return ret
 }
 
-pub fn get() -> HashMap<String, Item> {
+fn get_file_name(item: &Item) -> String {
+    let file_name = format!("items/images/{}-{}.png", item.item_type, item.meta);
+
+    return file_name
+}
+
+pub fn get() -> HashMap<[u8; 3], Item> {
     let items = get_items();
     let mut h = HashMap::new();
     
     for item in items {
-        // colorthief
-        // cargo add palette and image
-        h.insert(item.text_type.to_string(), item);
+        h.insert(item.color, item);
     }
 
     return h
