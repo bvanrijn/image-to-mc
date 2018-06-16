@@ -144,6 +144,7 @@ pub fn get_item_for_color(color: rgb::RGB8) -> Option<Item> {
     for data_value in data_values {
         let _cv = data_value.0;
         let _c: Vec<&str> = _cv.split(",").collect();
+
         let data_value_color = rgb::RGB {
             r: _c[0].parse().unwrap(),
             g: _c[1].parse().unwrap(),

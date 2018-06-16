@@ -1,18 +1,18 @@
+extern crate color_thief;
+extern crate image;
+extern crate image_utils;
+extern crate rgb;
 extern crate serde;
 extern crate serde_json;
-extern crate image;
-extern crate color_thief;
-extern crate rgb;
-extern crate image_utils;
 extern crate tempfile;
 
 #[macro_use]
 extern crate serde_derive;
 
 mod difference;
-mod values;
 mod dominant;
 mod resize;
+mod values;
 
 use image::GenericImage;
 
