@@ -153,7 +153,7 @@ pub fn get_item_for_color(color: rgb::RGB8) -> Option<Item> {
 
         let diff = difference::color_difference(color, data_value_color);
 
-        if diff < smallest_diff {
+        if diff < smallest_diff || smallest_diff == 0.0 {
             item = data_value.1;
             smallest_diff = diff;
         }
