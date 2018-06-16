@@ -3,3 +3,4 @@
 **/*.rs.bk
 *.png
 *.jpg
+values-resolved.json

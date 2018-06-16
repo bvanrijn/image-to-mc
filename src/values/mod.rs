@@ -40,7 +40,7 @@ fn get_items_text() -> String {
 }
 
 fn exclude_range(it: &mut Vec<u32>, start: u32, stop: u32) {
-    for i in start..stop {
+    for i in start..=stop {
         it.push(i)
     }
 }
