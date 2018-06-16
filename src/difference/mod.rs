@@ -32,13 +32,10 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
-        let mut a = rgb::RGB { r: 0, g: 0, b: 0 };
-        let mut b = rgb::RGB {
-            r: 255,
-            g: 255,
-            b: 255,
-        };
+    fn test_color_difference() {
+        let a = rgb::RGB { r: 0, g: 0, b: 0 };
+        let b = rgb::RGB { r: 255, g: 255, b: 255 };
+
         assert_eq!(color_difference(a, b), 765.0);
     }
 }
