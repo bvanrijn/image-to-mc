@@ -3,8 +3,14 @@
 `image-to-minecraft` lets you recreate any image inside Minecraft, completely automatically.
 It is **very much** a work in progress.
 
+## What's New
+
+### 0.1.0
+* Initial release that adds basic features.
+
 ## TODO
 
 - [ ] cache values::get_data_values() on disk
 - [ ] more robust error handling (now it calls `.unwrap()` most of the time)
 - [ ] improve algorithms and everything
+- [ ] add tests
