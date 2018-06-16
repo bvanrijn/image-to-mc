@@ -9,25 +9,19 @@ use std::vec::Vec;
 use difference;
 use dominant;
 use rgb;
-use util::{exclude_range,color_to_string};
+use util;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Item {
     #[serde(rename = "type")]
-    item_type: u32,
+    pub item_type: u32,
 
-    meta: u32,
-    name: String,
-    text_type: String,
+    pub meta: u32,
+    pub name: String,
+    pub text_type: String,
 
     #[serde(skip)]
-    color: [u8; 3],
-}
-
-fn get_file_name(item: &Item) -> String {
-    let file_name = format!("items/images/{}-{}.png", item.item_type, item.meta);
-
-    return file_name;
+    pub color: [u8; 3],
 }
 
 fn get_items_text() -> String {
@@ -59,9 +53,9 @@ fn get_items() -> Vec<Item> {
         211, 212, 213, 217, 218, 252,
     ];
 
-    exclude_range(&mut ignored_types, 219, 234);
-    exclude_range(&mut ignored_types, 235, 250);
-    exclude_range(&mut ignored_types, 255, 2267);
+    util::exclude_range(&mut ignored_types, 219, 234);
+    util::exclude_range(&mut ignored_types, 235, 250);
+    util::exclude_range(&mut ignored_types, 255, 2267);
 
     let items_text = get_items_text();
     let items: Vec<Item> = match serde_json::from_str(&items_text) {
@@ -76,7 +70,7 @@ fn get_items() -> Vec<Item> {
             continue;
         }
 
-        let file_name = get_file_name(&item);
+        let file_name = util::get_file_name(&item);
         let color = dominant::get_color(file_name);
 
         item.color = [color.r, color.g, color.b];
@@ -106,7 +100,7 @@ fn get_data_values() -> HashMap<String, Item> {
     let mut h = HashMap::new();
 
     for item in items {
-        h.insert(color_to_string(item.color), item);
+        h.insert(util::color_to_string(item.color), item);
     }
 
     let json = match serde_json::to_string(&h) {

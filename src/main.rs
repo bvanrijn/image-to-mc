@@ -20,7 +20,9 @@ mod values;
 
 fn main() {
     let image_location = rprompt::prompt_reply_stdout("Image location on disk: ").unwrap();
-    let coordinates = rprompt::prompt_reply_stdout("Coordinates (x;y;z): ").unwrap();
+    let coordinates_input = rprompt::prompt_reply_stdout("Coordinates (x;y;z): ").unwrap();
+
+    let coordinates = util::parse_coordinates(coordinates_input);
 
     let resized_image = resize::resize_image(image_location);
     let rgb_image = resized_image.to_rgb();
@@ -47,5 +49,15 @@ fn main() {
 
     util::sleep(3.0);
 
-    println!("{:?}", building_blocks);
+    for (n, row) in building_blocks.iter().enumerate() {
+        for (o, item) in row.iter().enumerate() {
+            keyboard::set_block(
+                coordinates.x + n as i32,
+                coordinates.y,
+                coordinates.z + o as i32,
+                item.text_type.to_string(),
+                item.meta,
+            )
+        }
+    }
 }

@@ -1,7 +1,7 @@
 use enigo::{Enigo, KeyboardControllable};
 use util;
 
-fn get_set_block_command(x: i32, y: i32, z: i32, block: String, data_value: i32) -> String {
+fn get_set_block_command(x: i32, y: i32, z: i32, block: String, data_value: u32) -> String {
     return format!("/setblock {} {} {} minecraft:{} {}", x, y, z, block, data_value)
 }
 
@@ -13,7 +13,7 @@ fn send_command(command: String) {
     enigo.key_sequence(&command);
 }
 
-pub fn set_block(x: i32, y: i32, z: i32, block: String, data_value: i32) {
+pub fn set_block(x: i32, y: i32, z: i32, block: String, data_value: u32) {
     let command = get_set_block_command(x, y, z, block, data_value);
     
     send_command(command);

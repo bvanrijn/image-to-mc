@@ -1,6 +1,7 @@
 use std::{thread, time};
 use image;
 use rgb;
+use values;
 
 pub fn exclude_range(it: &mut Vec<u32>, start: u32, stop: u32) {
     for i in start..=stop {
@@ -24,6 +25,36 @@ pub fn image_rgb_to_rgb_struct(color: image::Rgb<u8>) -> rgb::RGB<u8> {
         g: color[1],
         b: color[2],
     }
+}
+
+fn parse_coordinates_to_vec(coordinates: &str) -> Vec<i32> {
+    let coords: Vec<i32> = coordinates.split(";")
+    .map(|coord| coord.parse().unwrap())
+    .collect();
+
+    return coords
+}
+
+pub struct Coordinates {
+    pub x: i32,
+    pub y: i32,
+    pub z: i32,
+}
+
+pub fn parse_coordinates(coordinates: String) -> Coordinates {
+    let c = parse_coordinates_to_vec(coordinates.as_str());
+
+    return Coordinates{
+        x: c[0],
+        y: c[1],
+        z: c[2]
+    }
+}
+
+pub fn get_file_name(item: &values::Item) -> String {
+    let file_name = format!("items/images/{}-{}.png", item.item_type, item.meta);
+
+    return file_name;
 }
 
 #[cfg(test)]
