@@ -17,8 +17,9 @@ mod resize;
 use image::GenericImage;
 
 fn main() {
-    println!("{}", difference::color_difference(&mut [0, 0, 0], &mut [255, 255, 255]));
-    println!("{:?}", values::get_data_values());
+    println!("{}", difference::color_difference(rgb::RGB{r: 0, g: 0, b: 0}, rgb::RGB{r: 255, g: 255, b: 255}));
+    println!("{:?}", values::get_item_for_color(rgb::RGB{r: 0, g: 0, b: 0}));
+    // println!("{:?}", values::get_data_values());
     println!("{:?}", dominant::get_color("items/images/1-0.png".to_string()));
     println!("{:?}", resize::resize_image("President_Barack_Obama.jpg".to_string()).dimensions());
 }
