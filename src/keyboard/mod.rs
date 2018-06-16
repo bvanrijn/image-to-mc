@@ -1,4 +1,4 @@
-use enigo::*;
+use enigo::{Enigo, KeyboardControllable};
 use util;
 
 fn get_set_block_command(x: i32, y: i32, z: i32, block: String, data_value: i32) -> String {

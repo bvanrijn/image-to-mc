@@ -1,4 +1,6 @@
 use std::{thread, time};
+use image;
+use rgb;
 
 pub fn exclude_range(it: &mut Vec<u32>, start: u32, stop: u32) {
     for i in start..=stop {
@@ -14,6 +16,14 @@ pub fn sleep(s: f64) {
     let ten_millis = time::Duration::from_millis((s * 1000.0) as u64);
 
     thread::sleep(ten_millis);
+}
+
+pub fn image_rgb_to_rgb_struct(color: image::Rgb<u8>) -> rgb::RGB<u8> {
+    return rgb::RGB{
+        r: color[0],
+        g: color[1],
+        b: color[2],
+    }
 }
 
 #[cfg(test)]
