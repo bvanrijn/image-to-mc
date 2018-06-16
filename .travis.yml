@@ -3,13 +3,13 @@ sudo: required
 
 rust:
   - stable
-#  - beta
-#  - nightly
-# matrix:
-#   allow_failures:
-#     - rust: nightly
+  - beta
+  - nightly
+matrix:
+  allow_failures:
+    - rust: nightly
 
-#   fast_finish: true
+  fast_finish: true
 
 cache: cargo
 
