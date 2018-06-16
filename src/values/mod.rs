@@ -9,6 +9,7 @@ use std::vec::Vec;
 use difference;
 use dominant;
 use rgb;
+use util::{exclude_range,color_to_string};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Item {
@@ -21,6 +22,12 @@ pub struct Item {
 
     #[serde(skip)]
     color: [u8; 3],
+}
+
+fn get_file_name(item: &Item) -> String {
+    let file_name = format!("items/images/{}-{}.png", item.item_type, item.meta);
+
+    return file_name;
 }
 
 fn get_items_text() -> String {
@@ -37,12 +44,6 @@ fn get_items_text() -> String {
     }
 
     return contents;
-}
-
-fn exclude_range(it: &mut Vec<u32>, start: u32, stop: u32) {
-    for i in start..=stop {
-        it.push(i)
-    }
 }
 
 fn get_items() -> Vec<Item> {
@@ -84,16 +85,6 @@ fn get_items() -> Vec<Item> {
     }
 
     return ret;
-}
-
-fn get_file_name(item: &Item) -> String {
-    let file_name = format!("items/images/{}-{}.png", item.item_type, item.meta);
-
-    return file_name;
-}
-
-fn color_to_string(color: [u8; 3]) -> String {
-    format!("{},{},{}", color[0], color[1], color[2])
 }
 
 fn get_data_values() -> HashMap<String, Item> {

@@ -1,7 +1,9 @@
 extern crate color_thief;
+extern crate enigo;
 extern crate image;
 extern crate image_utils;
 extern crate rgb;
+extern crate rprompt;
 extern crate serde;
 extern crate serde_json;
 extern crate tempfile;
@@ -11,14 +13,22 @@ extern crate serde_derive;
 
 mod difference;
 mod dominant;
+mod keyboard;
 mod resize;
+mod util;
 mod values;
 
 use image::GenericImage;
 
 fn main() {
-    println!("{}", difference::color_difference(rgb::RGB{r: 0, g: 0, b: 0}, rgb::RGB{r: 255, g: 255, b: 255}));
-    println!("{:?}", values::get_item_for_color(rgb::RGB{r: 0, g: 0, b: 0}));
-    println!("{:?}", dominant::get_color("items/images/1-0.png".to_string()));
-    println!("{:?}", resize::resize_image("President_Barack_Obama.jpg".to_string()).dimensions());
+    let image_location = rprompt::prompt_reply_stdout("Image location on disk: ").unwrap();
+    let coordinates = rprompt::prompt_reply_stdout("Coordinates (x;y;z): ").unwrap();
+
+    let resized_image = resize::resize_image(image_location);
+    let size = resized_image.dimensions();
+
+    println!("Focus on the Minecraft window.");
+    println!("This is very important. Waiting 3 seconds ...");
+
+    util::sleep(3.0);
 }
