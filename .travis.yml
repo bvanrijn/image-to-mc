@@ -1,23 +1,35 @@
 language: rust
+
 sudo: false
-
-rust:
-  - stable
-  - beta
-  - nightly
-matrix:
-  allow_failures:
-    - rust: nightly
-
-  fast_finish: true
-
-cache: cargo
-
-branches:
-  - master
 
 addons:
   apt:
     update: true
     packages:
       - libxtst-dev
+
+before_install:
+  - cargo +nightly install clippy
+
+branches:
+  - master
+
+rust:
+  - stable
+  - beta
+  - nightly
+
+matrix:
+  allow_failures:
+    - rust: nightly
+
+  fast_finish: true
+
+script:
+  - cargo build --verbose
+  - cargo test --verbose
+  # Find out how to do this only for nightly (since clippy requires nightly)
+  - cargo +nightly clippy
+
+cache: cargo
+

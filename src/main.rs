@@ -51,13 +51,14 @@ fn main() {
 
     for (n, row) in building_blocks.iter().enumerate() {
         for (o, item) in row.iter().enumerate() {
-            keyboard::set_block(
-                coordinates.x + n as i32,
-                coordinates.y,
-                coordinates.z + o as i32,
-                item.text_type.to_string(),
-                item.meta,
-            )
+            println!("{}", keyboard::get_set_block_command(coordinates.x + n as i32, coordinates.y, coordinates.z + o as i32, item.text_type.to_string(), item.meta));
+            // keyboard::set_block(
+            //     coordinates.x + n as i32,
+            //     coordinates.y,
+            //     coordinates.z + o as i32,
+            //     item.text_type.to_string(),
+            //     item.meta,
+            // )
         }
     }
 }

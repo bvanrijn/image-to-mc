@@ -1,6 +1,6 @@
-use std::{thread, time};
 use image;
 use rgb;
+use std::{thread, time};
 use values;
 
 pub fn exclude_range(it: &mut Vec<u32>, start: u32, stop: u32) {
@@ -20,19 +20,20 @@ pub fn sleep(s: f64) {
 }
 
 pub fn image_rgb_to_rgb_struct(color: image::Rgb<u8>) -> rgb::RGB<u8> {
-    return rgb::RGB{
+    return rgb::RGB {
         r: color[0],
         g: color[1],
         b: color[2],
-    }
+    };
 }
 
 fn parse_coordinates_to_vec(coordinates: &str) -> Vec<i32> {
-    let coords: Vec<i32> = coordinates.split(";")
-    .map(|coord| coord.parse().unwrap())
-    .collect();
+    let coords: Vec<i32> = coordinates
+        .split(";")
+        .map(|coord| coord.parse().unwrap())
+        .collect();
 
-    return coords
+    return coords;
 }
 
 pub struct Coordinates {
@@ -44,11 +45,11 @@ pub struct Coordinates {
 pub fn parse_coordinates(coordinates: String) -> Coordinates {
     let c = parse_coordinates_to_vec(coordinates.as_str());
 
-    return Coordinates{
+    return Coordinates {
         x: c[0],
         y: c[1],
-        z: c[2]
-    }
+        z: c[2],
+    };
 }
 
 pub fn get_file_name(item: &values::Item) -> String {
@@ -65,7 +66,7 @@ mod tests {
     fn test_exclude_range_len() {
         let mut it: Vec<u32> = vec![0, 1, 2, 3];
         exclude_range(&mut it, 4, 10);
-    
+
         assert_eq!(it.len(), 11);
     }
 
@@ -74,11 +75,11 @@ mod tests {
         let mut it: Vec<u32> = vec![0, 1, 2, 3];
         exclude_range(&mut it, 4, 10);
 
-        assert_eq!(it[it.len()-1], 10);
+        assert_eq!(it[it.len() - 1], 10);
     }
 
     #[test]
     fn test_color_to_string() {
-        assert_eq!(color_to_string([12,34,56]), "12,34,56");
+        assert_eq!(color_to_string([12, 34, 56]), "12,34,56");
     }
 }
