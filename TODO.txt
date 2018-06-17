@@ -1,6 +1,0 @@
-- [ ] more robust error handling (now it calls `.unwrap()` most of the time)
-- [ ] improve algorithms and everything
-- [ ] add `dominant`, `util` and `values` tests.
-- [x] extract small utilities into their own module
-- [x] sort dependencies in `Cargo.toml`?
-- [x] cache values::get_data_values() on disk

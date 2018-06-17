@@ -1,5 +1,5 @@
 language: rust
-sudo: required
+sudo: false
 
 rust:
   - stable
@@ -16,8 +16,8 @@ cache: cargo
 branches:
   - master
 
-before_install:
-  - sudo apt-get install -y libxtst-dev
 addons:
   apt:
     update: true
+    packages:
+      - libxtst-dev
