@@ -12,9 +12,9 @@ pub fn color_difference(a: rgb::RGB8, b: rgb::RGB8) -> f64 {
     let G_2: i32 = (_b[1]).into();
     let B_2: i32 = (_b[2]).into();
 
-    let D_R: i32 = (R_1 - R_2).into();
-    let D_G: i32 = (G_1 - G_2).into();
-    let D_B: i32 = (B_1 - B_2).into();
+    let D_R: i32 = R_1 - R_2;
+    let D_G: i32 = G_1 - G_2;
+    let D_B: i32 = B_1 - B_2;
 
     let D_R_S: f64 = (i32::pow(D_R, 2)).into();
     let D_G_S: f64 = (i32::pow(D_G, 2)).into();
@@ -24,7 +24,7 @@ pub fn color_difference(a: rgb::RGB8, b: rgb::RGB8) -> f64 {
 
     let f = 2.0 * D_R_S + 4.0 * D_G_S + 3.0 * D_B_S + (r_ * (D_R_S - D_B_S)) / 256.0;
 
-    return f64::sqrt(f);
+    f64::sqrt(f)
 }
 
 #[cfg(test)]

@@ -9,7 +9,7 @@ pub fn resize_image(file_name: String) -> image::DynamicImage {
 
     image_utils::resize(&Path::new(&file_name), 50, 50, &Path::new(output_file)).unwrap();
 
-    return image::open(output_file).unwrap();
+    image::open(output_file).unwrap()
 }
 
 #[cfg(test)]

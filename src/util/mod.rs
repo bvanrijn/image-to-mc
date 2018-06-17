@@ -20,20 +20,20 @@ pub fn sleep(s: f64) {
 }
 
 pub fn image_rgb_to_rgb_struct(color: image::Rgb<u8>) -> rgb::RGB<u8> {
-    return rgb::RGB {
+    rgb::RGB {
         r: color[0],
         g: color[1],
         b: color[2],
-    };
+    }
 }
 
 fn parse_coordinates_to_vec(coordinates: &str) -> Vec<i32> {
     let coords: Vec<i32> = coordinates
-        .split(";")
+        .split(';')
         .map(|coord| coord.parse().unwrap())
         .collect();
 
-    return coords;
+    coords
 }
 
 pub struct Coordinates {
@@ -45,17 +45,17 @@ pub struct Coordinates {
 pub fn parse_coordinates(coordinates: String) -> Coordinates {
     let c = parse_coordinates_to_vec(coordinates.as_str());
 
-    return Coordinates {
+    Coordinates {
         x: c[0],
         y: c[1],
         z: c[2],
-    };
+    }
 }
 
 pub fn get_file_name(item: &values::Item) -> String {
     let file_name = format!("items/images/{}-{}.png", item.item_type, item.meta);
 
-    return file_name;
+    file_name
 }
 
 #[cfg(test)]

@@ -37,7 +37,7 @@ fn get_items_text() -> String {
         Ok(_) => {}
     }
 
-    return contents;
+    contents
 }
 
 fn get_items() -> Vec<Item> {
@@ -78,7 +78,7 @@ fn get_items() -> Vec<Item> {
         ret.push(item);
     }
 
-    return ret;
+    ret
 }
 
 fn get_data_values() -> HashMap<String, Item> {
@@ -109,9 +109,9 @@ fn get_data_values() -> HashMap<String, Item> {
     };
 
     let mut file = File::create("values-resolved.json").unwrap();
-    file.write(json.as_bytes()).unwrap();
+    file.write_all(json.as_bytes()).unwrap();
 
-    return h;
+    h
 }
 
 pub fn get_item_for_color(color: rgb::RGB8) -> Option<Item> {
@@ -128,7 +128,7 @@ pub fn get_item_for_color(color: rgb::RGB8) -> Option<Item> {
 
     for data_value in data_values {
         let _cv = data_value.0;
-        let _c: Vec<&str> = _cv.split(",").collect();
+        let _c: Vec<&str> = _cv.split(',').collect();
 
         let data_value_color = rgb::RGB {
             r: _c[0].parse().unwrap(),
@@ -145,8 +145,8 @@ pub fn get_item_for_color(color: rgb::RGB8) -> Option<Item> {
     }
 
     if item.text_type == "" {
-        return None;
+        None
     } else {
-        return Some(item);
+        Some(item)
     }
 }
