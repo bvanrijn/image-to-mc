@@ -1,6 +1,6 @@
 use color_thief;
 use image;
-use image::GenericImage;
+use image::GenericImageView;
 use rgb;
 use std::vec::Vec;
 

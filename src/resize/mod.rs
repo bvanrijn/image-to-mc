@@ -15,11 +15,14 @@ pub fn resize_image(file_name: String) -> image::DynamicImage {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use image::GenericImage;
+    use image::GenericImageView;
 
     #[test]
     fn test_resize_image() {
         // println!("{:?}", resize_image("src/resize/test_resize.jpg".to_string()).dimensions());
-        assert_eq!(resize_image("src/resize/test_resize.jpg".to_string()).dimensions(), (33, 50));
+        assert_eq!(
+            resize_image("src/resize/test_resize.jpg".to_string()).dimensions(),
+            (33, 50)
+        );
     }
 }
