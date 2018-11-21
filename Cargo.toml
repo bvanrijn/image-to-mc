@@ -5,7 +5,7 @@ authors = ["Barend <bvanrijn@users.noreply.github.com>"]
 
 [dependencies]
 color-thief = "0.1.0"
-enigo = "0.0.11"
+enigo = "0.0.12"
 image = "0.20.1"
 image-utils = "0.2.0"
 rgb = "0.8.11"
