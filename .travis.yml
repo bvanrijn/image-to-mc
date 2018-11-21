@@ -5,7 +5,8 @@ addons:
     update: true
     packages:
       - libxtst-dev
-
+      - xdotool
+  
 before_install:
   - if [ $TRAVIS_RUST_VERSION == nightly ]; then rustup component add clippy-preview ; fi
 
