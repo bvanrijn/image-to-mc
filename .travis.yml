@@ -1,7 +1,5 @@
 language: rust
 
-sudo: false
-
 addons:
   apt:
     update: true
@@ -9,7 +7,7 @@ addons:
       - libxtst-dev
 
 before_install:
-  - cargo +nightly install clippy
+  - if [ $TRAVIS_RUST_VERSION == nightly ]; then cargo install clippy ; fi
 
 branches:
   - master
@@ -28,8 +26,7 @@ matrix:
 script:
   - cargo build --verbose
   - cargo test --verbose
-  # Find out how to do this only for nightly (since clippy requires nightly)
-  - cargo +nightly clippy
+  - if [ $TRAVIS_RUST_VERSION == nightly ]; then cargo clippy ; fi
 
 cache: cargo
 
